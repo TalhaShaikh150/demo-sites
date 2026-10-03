@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miller's Mobile Auto Detailing | Kissimmee & Orlando</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Syne (Luxury) & Space Grotesk (Tech) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest "></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#D92323',       /* Miller Red */
+                            black: '#080808',     /* Deep Black */
+                            zinc: '#121212',      /* Secondary Dark */
+                            tan: '#F4F1EA',       /* Beige Background */
+                            gray: '#888888'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 12s linear infinite',
+                        'marquee': 'marquee 30s linear infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        }
+                    },
+                    backgroundImage: {
+                        'noise': "url('https://grainy-gradients.vercel.app/noise.svg')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #080808; }
+        ::-webkit-scrollbar-thumb { background: #D92323; border-radius: 4px; }
+        
+        .text-outline { -webkit-text-stroke: 1px rgba(255,255,255,0.2); color: transparent; }
+        .text-outline-dark { -webkit-text-stroke: 1px rgba(0,0,0,0.1); color: transparent; }
+        
+        .service-img {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.7s ease-out;
+            transform: scale(1.05);
+        }
+        .service-img.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .custom-checkbox { accent-color: #D92323; }
+        
+        /* Smooth video loop transition */
+        video { object-fit: cover; }
+    </style>
+</head>
+<body class="bg-brand-black text-brand-tan overflow-x-hidden selection:bg-brand-red selection:text-white relative">
+    
+    <!-- Grain Overlay for Cinematic Texture -->
+    <div class="fixed inset-0 opacity-[0.03] pointer-events-none z-50 bg-noise mix-blend-overlay"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 md:py-6 bg-brand-black/95 md:bg-transparent backdrop-blur-md md:backdrop-blur-none border-b border-white/10 md:border-transparent md:mix-blend-difference text-white transition-all duration-300">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 border-2 border-white rounded-full flex items-center justify-center relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                    <span class="font-display font-bold text-lg relative z-10 group-hover:text-black transition-colors">M</span>
+                </div>
+                <span class="font-display font-bold text-xl tracking-tighter hidden md:block">MILLER'S</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-12 font-sans text-sm font-medium tracking-wide">
+                <a href="#process" class="hover:text-gray-400 transition-colors">PROCESS</a>
+                <a href="#services" class="hover:text-gray-400 transition-colors">SERVICES</a>
+                <a href="#areas" class="hover:text-gray-400 transition-colors">LOCATIONS</a>
+                <a href="#faq" class="hover:text-gray-400 transition-colors">FAQ</a>
+            </div>
+
+            <div class="hidden md:flex items-center gap-6">
+                <a href="tel:8133244245" class="text-xs font-bold uppercase tracking-widest hover:text-brand-red transition-colors flex items-center gap-2">
+                    <i data-lucide="phone" class="w-4 h-4"></i> (813) 324-4245
+                </a>
+                <a href="#contact" class="bg-white text-black px-6 py-2.5 rounded-sm font-sans font-bold text-xs uppercase tracking-widest hover:bg-brand-red hover:text-white transition-colors duration-300">
+                    Book Now
+                </a>
+            </div>
+            
+            <button id="mobileMenuBtn" class="md:hidden text-white"><i data-lucide="menu"></i></button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU FULL SCREEN -->
+    <div id="mobileMenu" class="fixed inset-0 bg-brand-black/95 backdrop-blur-xl z-[60] flex flex-col items-center justify-center translate-x-full transition-transform duration-300">
+        <button id="closeMenuBtn" class="absolute top-6 right-6 text-white hover:text-brand-red transition">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div class="flex flex-col items-center gap-8 text-white font-display text-2xl uppercase tracking-widest">
+            <a href="#process" class="mobile-link hover:text-brand-red transition">Process</a>
+            <a href="#services" class="mobile-link hover:text-brand-red transition">Services</a>
+            <a href="#areas" class="mobile-link hover:text-brand-red transition">Locations</a>
+            <a href="#faq" class="mobile-link hover:text-brand-red transition">FAQ</a>
+            <a href="#contact" class="mobile-link bg-brand-red px-8 py-3 rounded-sm text-sm mt-4 hover:bg-red-700 transition">Book Now</a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION (Split Screen) -->
+    <header class="relative w-full min-h-[100dvh] grid lg:grid-cols-2">
+        <!-- Left: Content (Solid Black) -->
+        <div class="bg-brand-black flex flex-col justify-center px-6 md:px-16 lg:px-24 pt-20 pb-8 md:pt-32 md:pb-16 lg:py-20 order-1 relative z-10 border-r border-white/5 items-center md:items-start text-center md:text-left">
+            <div class="mb-4 md:mb-10 flex flex-col items-center md:items-start">
+                <div class="inline-flex items-center gap-3 border border-brand-red/30 bg-brand-red/10 px-3 py-1 rounded-full mb-4 md:mb-6">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-red"></span>
+                    </span>
+                    <span class="text-brand-red font-sans font-bold uppercase tracking-widest text-[9px] md:text-[10px]">Serving Kissimmee & Orlando</span>
+                </div>
+                <h1 class="font-display font-bold text-4xl sm:text-5xl md:text-7xl leading-[0.95] uppercase text-white">
+                    Detailing <br>
+                    <span class="text-gray-700">Redefined.</span>
+                </h1>
+            </div>
+            
+            <p class="font-sans text-gray-400 text-[13px] md:text-lg mb-4 md:mb-10 max-w-md leading-relaxed">
+                We bring the studio to your driveway. Fully equipped with water, power, and industry-leading expertise.
+            </p>
+    
+            <form class="bg-brand-zinc p-1.5 border border-white/10 rounded-sm w-full max-w-md flex flex-col sm:flex-row gap-2">
+                <input type="text" placeholder="Enter vehicle model..." class="bg-transparent text-white px-3 md:px-4 py-2 md:py-3 outline-none w-full font-sans placeholder:text-gray-600 focus:bg-white/5 transition-colors rounded-sm text-xs md:text-sm">
+                <a href="#contact" class="bg-brand-red text-white px-6 md:px-8 py-2 md:py-3 font-bold uppercase text-[9px] md:text-[10px] lg:text-xs tracking-widest whitespace-nowrap text-center hover:bg-red-700 transition-colors flex items-center justify-center gap-1 md:gap-2 rounded-sm">
+                    Get Quote <i data-lucide="arrow-right" class="w-3 h-3 md:w-4 md:h-4"></i>
+                </a>
+            </form>
+    
+            <div class="flex flex-wrap justify-center md:justify-start gap-4 md:gap-8 mt-6 md:mt-16 pt-4 md:pt-8 border-t border-white/10 opacity-70 w-full">
+                 <div class="flex items-center gap-2 md:gap-3">
+                    <i data-lucide="shield-check" class="text-brand-red w-4 h-4 md:w-5 md:h-5"></i>
+                    <span class="text-[9px] md:text-xs text-white font-sans uppercase tracking-wider">Fully Insured</span>
+                 </div>
+                 <div class="flex items-center gap-2 md:gap-3">
+                    <i data-lucide="zap" class="text-brand-red w-4 h-4 md:w-5 md:h-5"></i>
+                    <span class="text-[9px] md:text-xs text-white font-sans uppercase tracking-wider">Self-Sufficient</span>
+                 </div>
+            </div>
+        </div>
+    
+        <!-- Right: Video -->
+        <div class="relative h-[40vh] lg:h-auto order-2 overflow-hidden group">
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover transition-all duration-1000">
+                <source src="https://storage.googleapis.com/msgsndr/hIiOgibs7jQPA3vIQPRo/media/694fd24fdda19280678cd410.mp4" type="video/mp4">
+            </video>
+            <div class="absolute inset-0 bg-black/20 lg:bg-transparent lg:bg-gradient-to-l from-transparent to-brand-black/90"></div>
+            
+            <!-- Floating Rating Card -->
+            <div class="absolute bottom-8 right-8 bg-black/40 backdrop-blur-md border border-white/10 p-5 rounded-sm text-right hidden md:block">
+                <div class="flex justify-end gap-1 mb-2">
+                    <i data-lucide="star" class="w-4 h-4 text-brand-red fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-brand-red fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-brand-red fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-brand-red fill-current"></i>
+                    <i data-lucide="star" class="w-4 h-4 text-brand-red fill-current"></i>
+                </div>
+                <p class="text-white font-bold font-display text-xl leading-none">5.0 Rating</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase">Based on 70+ Google Reviews</p>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- NEW SECTION: THE MOBILE ADVANTAGE -->
+    <section class="py-24 bg-brand-black relative">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <!-- Text Content -->
+                <div class="order-2 md:order-1">
+                    <h2 class="text-brand-red font-sans font-bold uppercase tracking-[0.2em] text-xs mb-4">No Hookups Required</h2>
+                    <h3 class="font-display font-bold text-4xl md:text-6xl mb-6 md:mb-8 leading-tight text-white">
+                        WE BRING THE <br>
+                        <span class="text-outline">ENTIRE SHOP.</span>
+                    </h3>
+                    <p class="font-sans text-gray-400 text-sm md:text-lg leading-relaxed mb-8">
+                        Most mobile detailers need your garden hose and an extension cord. Not us. Our vans are custom-built engineering marvels equipped with onboard water tanks, generators, and filtration systems.
+                    </p>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="bg-brand-zinc p-3 rounded-sm border border-white/10">
+                                <i data-lucide="droplet" class="text-brand-red w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold font-display uppercase">Spot-Free Water</h4>
+                                <p class="text-sm text-gray-500 mt-1">We filter minerals out for a streak-free finish.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="bg-brand-zinc p-3 rounded-sm border border-white/10">
+                                <i data-lucide="zap" class="text-brand-red w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-bold font-display uppercase">Onboard Power</h4>
+                                <p class="text-sm text-gray-500 mt-1">High-end polishers and steamers run off our generators.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Image Composition -->
+                <div class="relative order-1 md:order-2">
+                    <div class="absolute -top-4 -right-4 w-full h-full border border-brand-red/30 z-0"></div>
+                    <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=2000&auto=format&fit=crop" alt="Detailing Action" class="relative z-10 w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 object-cover shadow-2xl">
+                    <div class="absolute bottom-0 left-0 bg-brand-red text-white px-6 py-4 font-display font-bold text-2xl z-20">
+                        100% MOBILE
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: THE PROCESS -->
+    <section id="process" class="py-24 bg-brand-zinc border-t border-white/5">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display font-bold text-3xl md:text-4xl text-white uppercase">How It Works</h2>
+                <div class="w-24 h-1 bg-brand-red mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="bg-brand-black p-8 border border-white/5 relative group hover:border-brand-red/50 transition-colors">
+                    <span class="absolute top-0 right-0 p-4 text-6xl font-display font-bold text-white/5 group-hover:text-brand-red/10 transition-colors">01</span>
+                    <i data-lucide="calendar" class="w-10 h-10 text-brand-red mb-6"></i>
+                    <h3 class="text-white font-bold font-display text-xl uppercase mb-3">Book Online</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Select your package, choose a time that fits your schedule, and enter your location details.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-brand-black p-8 border border-white/5 relative group hover:border-brand-red/50 transition-colors">
+                    <span class="absolute top-0 right-0 p-4 text-6xl font-display font-bold text-white/5 group-hover:text-brand-red/10 transition-colors">02</span>
+                    <i data-lucide="truck" class="w-10 h-10 text-brand-red mb-6"></i>
+                    <h3 class="text-white font-bold font-display text-xl uppercase mb-3">We Arrive</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Our fully equipped van arrives at your home or office. We just need your keys and a parking spot.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-brand-black p-8 border border-white/5 relative group hover:border-brand-red/50 transition-colors">
+                    <span class="absolute top-0 right-0 p-4 text-6xl font-display font-bold text-white/5 group-hover:text-brand-red/10 transition-colors">03</span>
+                    <i data-lucide="check-circle" class="w-10 h-10 text-brand-red mb-6"></i>
+                    <h3 class="text-white font-bold font-display text-xl uppercase mb-3">Inspection & Shine</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">We perform the service and do a final walkthrough with you to ensure 100% satisfaction.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE SERVICES LIST (Tan Background for contrast) -->
+    <section id="services" class="py-24 bg-brand-tan text-brand-black relative overflow-hidden">
+        <div class="max-w-[1400px] mx-auto px-6 grid lg:grid-cols-2 gap-12 h-full">
+            
+            <!-- Left: List -->
+            <div class="flex flex-col justify-center relative z-20">
+                <h2 class="font-sans font-bold uppercase tracking-widest text-brand-red mb-12">Our Packages</h2>
+                
+                <div class="space-y-2" id="services-list">
+                    <!-- Item 1: Auto Detailing -->
+                    <div class="service-item group cursor-pointer border-b border-black/10 py-8 transition-all hover:pl-4" onmouseenter="changeImage(0)">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-display text-2xl md:text-4xl font-bold uppercase group-hover:text-brand-red transition-colors">Full Detailing</h3>
+                            <i data-lucide="arrow-right" class="w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity text-brand-red"></i>
+                        </div>
+                        <p class="font-sans text-gray-600 text-sm leading-relaxed max-w-lg h-0 overflow-hidden group-hover:h-auto transition-all duration-500">
+                            Deep interior steam clean, leather conditioning, exterior foam wash, clay bar decontamination, and high-grade sealant application. The "Reset" button for your car.
+                        </p>
+                    </div>
+
+                    <!-- Item 2: Ceramic Coating -->
+                    <div class="service-item group cursor-pointer border-b border-black/10 py-8 transition-all hover:pl-4" onmouseenter="changeImage(1)">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-display text-2xl md:text-4xl font-bold uppercase group-hover:text-brand-red transition-colors">Ceramic Coating</h3>
+                            <span class="font-sans font-bold text-[10px] uppercase bg-black text-white px-2 py-1 rounded">Best Value</span>
+                        </div>
+                        <p class="font-sans text-gray-600 text-sm leading-relaxed max-w-lg h-0 overflow-hidden group-hover:h-auto transition-all duration-500">
+                            9-Year protection against UV rays, bird droppings, and scratches. Creates a hydrophobic glass-like shield that makes washing your car effortless.
+                        </p>
+                    </div>
+
+                    <!-- Item 3: Paint Correction -->
+                    <div class="service-item group cursor-pointer border-b border-black/10 py-8 transition-all hover:pl-4" onmouseenter="changeImage(2)">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-display text-2xl md:text-4xl font-bold uppercase group-hover:text-brand-red transition-colors">Paint Correction</h3>
+                        </div>
+                        <p class="font-sans text-gray-600 text-sm leading-relaxed max-w-lg h-0 overflow-hidden group-hover:h-auto transition-all duration-500">
+                            Multi-stage machine polishing to remove swirl marks, oxidation, and scratches. We restore the depth and clarity of your paint before protecting it.
+                        </p>
+                    </div>
+
+                    <!-- Item 4: Int/Ext Only -->
+                    <div class="service-item group cursor-pointer border-b border-black/10 py-8 transition-all hover:pl-4" onmouseenter="changeImage(3)">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="font-display text-2xl md:text-4xl font-bold uppercase group-hover:text-brand-red transition-colors">Maintenance Wash</h3>
+                        </div>
+                        <p class="font-sans text-gray-600 text-sm leading-relaxed max-w-lg h-0 overflow-hidden group-hover:h-auto transition-all duration-500">
+                            Perfect for regularly maintained vehicles. Includes exterior hand wash, wheel cleaning, and interior vacuum + wipe down.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Dynamic Image Display -->
+            <div class="relative h-[500px] lg:h-auto hidden lg:block overflow-hidden rounded-sm bg-black">
+                <!-- High Quality Unsplash Images -->
+                <img src="https://images.unsplash.com/photo-1601362840469-51e4d8d58785?q=80&w=2000&auto=format&fit=crop" class="service-img active absolute inset-0 w-full h-full object-cover" data-index="0">
+                <img src="https://images.unsplash.com/photo-1635783350355-081440813735?q=80&w=2000&auto=format&fit=crop" class="service-img absolute inset-0 w-full h-full object-cover" data-index="1">
+                <img src="https://images.unsplash.com/photo-1570125909517-53cb21c89581?q=80&w=2000&auto=format&fit=crop" class="service-img absolute inset-0 w-full h-full object-cover" data-index="2">
+                <img src="https://images.unsplash.com/photo-1520340356584-2996384bb449?q=80&w=2000&auto=format&fit=crop" class="service-img absolute inset-0 w-full h-full object-cover" data-index="3">
+                
+                <!-- Floating Badge -->
+                <div class="absolute bottom-8 right-8 bg-white p-6 max-w-xs shadow-2xl z-10">
+                    <p class="font-display font-bold text-2xl leading-none mb-1 text-black">Miller's M.A.D.</p>
+                    <p class="font-sans text-xs text-gray-500 uppercase">Premium Mobile Detailing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: SERVICE AREAS (Visual) -->
+    <section id="areas" class="py-24 bg-brand-black relative border-t border-white/5 overflow-hidden">
+        <!-- Animated Radar Effect Background -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-white/5 rounded-full animate-pulse-slow"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white/5 rounded-full"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-white/5 rounded-full"></div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="font-display font-bold text-4xl md:text-5xl text-white uppercase mb-6">Service Areas</h2>
+            <p class="text-gray-400 max-w-xl mx-auto mb-12 font-sans">
+                We operate a fleet of mobile units across Central Florida. If you are in these zones, we come to you.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <span class="px-6 py-3 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-brand-red hover:border-brand-red transition-all cursor-default bg-black">Orlando</span>
+                <span class="px-6 py-3 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-brand-red hover:border-brand-red transition-all cursor-default bg-black">Kissimmee</span>
+                <span class="px-6 py-3 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-brand-red hover:border-brand-red transition-all cursor-default bg-black">Celebration</span>
+                <span class="px-6 py-3 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-brand-red hover:border-brand-red transition-all cursor-default bg-black">St. Cloud</span>
+                <span class="px-6 py-3 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-brand-red hover:border-brand-red transition-all cursor-default bg-black">Lake Nona</span>
+                <span class="px-6 py-3 border border-white/20 text-white font-bold uppercase tracking-widest text-sm hover:bg-brand-red hover:border-brand-red transition-all cursor-default bg-black">Davenport</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS GRID -->
+    <section class="py-24 bg-brand-zinc border-t border-white/5">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4 md:gap-0">
+                <div>
+                    <h2 class="font-sans font-bold uppercase tracking-widest text-brand-red mb-2">Feedback</h2>
+                    <h2 class="font-display font-bold text-4xl md:text-5xl text-white uppercase">Client <br class="hidden md:block">Stories</h2>
+                </div>
+                <div class="flex flex-col items-start md:items-end mt-4 md:mt-0">
+                    <div class="flex gap-1 text-brand-red">
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i>
+                    </div>
+                    <p class="text-white mt-2 font-sans font-bold text-sm uppercase">5.0 | 70+ Google Reviews</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Review 1 -->
+                <div class="bg-brand-black p-8 border border-white/5 hover:border-brand-red/50 transition-colors group">
+                    <div class="mb-6 opacity-30 text-6xl font-serif text-brand-red">"</div>
+                    <p class="text-gray-300 font-sans leading-relaxed mb-6 text-sm">Unbelievable attention to detail. The ceramic coating on my truck makes washing it a breeze now. Highly recommended.</p>
+                    <div class="flex items-center gap-3 pt-6 border-t border-white/5">
+                        <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white font-bold">JD</div>
+                        <div>
+                            <p class="font-display font-bold text-white uppercase">John D.</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Google Review</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-brand-black p-8 border border-white/5 hover:border-brand-red/50 transition-colors group">
+                    <div class="mb-6 opacity-30 text-6xl font-serif text-brand-red">"</div>
+                    <p class="text-gray-300 font-sans leading-relaxed mb-6 text-sm">Cody was professional and on time. My interior looks brand new after the steam cleaning. No mess left behind.</p>
+                    <div class="flex items-center gap-3 pt-6 border-t border-white/5">
+                        <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white font-bold">SM</div>
+                        <div>
+                            <p class="font-display font-bold text-white uppercase">Sarah M.</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Google Review</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-brand-black p-8 border border-white/5 hover:border-brand-red/50 transition-colors group">
+                    <div class="mb-6 opacity-30 text-6xl font-serif text-brand-red">"</div>
+                    <p class="text-gray-300 font-sans leading-relaxed mb-6 text-sm">Best mobile detailer in Orlando. Used them for paint correction on my Porsche and the swirls are completely gone.</p>
+                    <div class="flex items-center gap-3 pt-6 border-t border-white/5">
+                        <div class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-white font-bold">MK</div>
+                        <div>
+                            <p class="font-display font-bold text-white uppercase">Mike K.</p>
+                            <p class="text-[10px] text-gray-500 uppercase tracking-widest">Google Review</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-24 bg-brand-black border-t border-white/5">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="font-display font-bold text-4xl text-white uppercase text-center mb-4">FAQ</h2>
+            <p class="text-gray-400 text-center mb-12 font-sans">Quick answers to common questions.</p>
+
+            <div class="space-y-4">
+                <details class="group bg-brand-zinc border border-white/10 p-6 cursor-pointer rounded-sm open:border-brand-red/30 transition-all">
+                    <summary class="flex justify-between items-center font-bold text-white list-none font-sans uppercase text-sm tracking-wide">
+                        <span>How long does a detailing service take?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-brand-red"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-400 mt-4 text-sm leading-relaxed font-sans border-t border-white/5 pt-4">
+                        Times vary by vehicle condition and package. A full detail typically takes 3-5 hours. All packages include our mobile unit coming to you with water and power supply.
+                    </p>
+                </details>
+
+                <details class="group bg-brand-zinc border border-white/10 p-6 cursor-pointer rounded-sm open:border-brand-red/30 transition-all">
+                    <summary class="flex justify-between items-center font-bold text-white list-none font-sans uppercase text-sm tracking-wide">
+                        <span>What forms of payment do you accept?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-brand-red"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-400 mt-4 text-sm leading-relaxed font-sans border-t border-white/5 pt-4">
+                        We accept all major Credit Cards, Cash, and Zelle. Payment is due upon completion of the service and your final inspection.
+                    </p>
+                </details>
+
+                <details class="group bg-brand-zinc border border-white/10 p-6 cursor-pointer rounded-sm open:border-brand-red/30 transition-all">
+                    <summary class="flex justify-between items-center font-bold text-white list-none font-sans uppercase text-sm tracking-wide">
+                        <span>Do you have same-day appointments?</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-brand-red"><i data-lucide="chevron-down"></i></span>
+                    </summary>
+                    <p class="text-gray-400 mt-4 text-sm leading-relaxed font-sans border-t border-white/5 pt-4">
+                        We recommend booking in advance, but we do occasionally have same-day openings. Call us directly at (813) 324-4245 to check availability.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT / BOOKING (The Cockpit) -->
+    <section id="contact" class="py-24 bg-brand-black relative overflow-hidden">
+        <!-- Abstract Red Glow Background -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red opacity-10 blur-[150px] rounded-full"></div>
+
+        <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-0 bg-brand-zinc/80 backdrop-blur-md border border-white/10 rounded-lg overflow-hidden shadow-2xl">
+                
+                <!-- Left Info -->
+                <div class="lg:col-span-5 bg-brand-red p-6 md:p-12 text-white flex flex-col justify-between relative overflow-hidden">
+                    <div class="z-10">
+                        <h2 class="font-display font-bold text-4xl md:text-5xl mb-6 uppercase">Let's <br class="hidden md:block">Roll.</h2>
+                        <p class="font-sans text-sm md:text-base text-white/90">Ready for a showroom shine? Fill out the details and we'll confirm your appointment.</p>
+                        
+                        <div class="space-y-4 md:space-y-6 font-sans mt-8 pt-8 border-t border-white/20">
+                            <div class="flex items-center gap-3 md:gap-4">
+                                <i data-lucide="phone" class="w-5 h-5 md:w-6 md:h-6 shrink-0"></i>
+                                <span class="text-base md:text-lg font-bold break-all md:break-normal">813-324-4245</span>
+                            </div>
+                            <div class="flex items-center gap-3 md:gap-4">
+                                <i data-lucide="mail" class="w-5 h-5 md:w-6 md:h-6 shrink-0"></i>
+                                <span class="text-sm md:text-lg break-all md:break-normal">cody@millersautodetailing.com</span>
+                            </div>
+                            <div class="flex items-center gap-3 md:gap-4">
+                                <i data-lucide="map-pin" class="w-5 h-5 md:w-6 md:h-6 shrink-0"></i>
+                                <span class="text-base md:text-lg break-all md:break-normal">Orlando, FL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="font-display font-bold text-[120px] md:text-[180px] leading-none absolute -bottom-5 -right-5 md:-bottom-10 md:-right-10 opacity-10 select-none text-black mix-blend-overlay">M</div>
+                </div>
+
+                <!-- Right Form -->
+                <div class="lg:col-span-7 p-6 md:p-12">
+                    <form class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="group">
+                                <label class="block text-[10px] uppercase text-gray-500 mb-2 font-bold tracking-wider group-focus-within:text-brand-red transition-colors">First Name</label>
+                                <input type="text" class="w-full bg-transparent border-b border-gray-700 text-white py-2 focus:outline-none focus:border-brand-red transition-colors font-sans" placeholder="Type here...">
+                            </div>
+                            <div class="group">
+                                <label class="block text-[10px] uppercase text-gray-500 mb-2 font-bold tracking-wider group-focus-within:text-brand-red transition-colors">Last Name</label>
+                                <input type="text" class="w-full bg-transparent border-b border-gray-700 text-white py-2 focus:outline-none focus:border-brand-red transition-colors font-sans" placeholder="Type here...">
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="group">
+                                <label class="block text-[10px] uppercase text-gray-500 mb-2 font-bold tracking-wider group-focus-within:text-brand-red transition-colors">Phone</label>
+                                <input type="tel" class="w-full bg-transparent border-b border-gray-700 text-white py-2 focus:outline-none focus:border-brand-red transition-colors font-sans" placeholder="(555) 555-5555">
+                            </div>
+                            <div class="group">
+                                <label class="block text-[10px] uppercase text-gray-500 mb-2 font-bold tracking-wider group-focus-within:text-brand-red transition-colors">Email *</label>
+                                <input type="email" class="w-full bg-transparent border-b border-gray-700 text-white py-2 focus:outline-none focus:border-brand-red transition-colors font-sans" placeholder="name@email.com">
+                            </div>
+                        </div>
+
+                        <div class="group">
+                            <label class="block text-[10px] uppercase text-gray-500 mb-2 font-bold tracking-wider group-focus-within:text-brand-red transition-colors">Vehicle (Year, Make and Model)</label>
+                            <input type="text" class="w-full bg-transparent border-b border-gray-700 text-white py-2 focus:outline-none focus:border-brand-red transition-colors font-sans" placeholder="e.g. 2023 Ford F150">
+                        </div>
+
+                        <div class="group">
+                            <label class="block text-[10px] uppercase text-gray-500 mb-2 font-bold tracking-wider group-focus-within:text-brand-red transition-colors">Desired Service</label>
+                            <select class="w-full bg-transparent border-b border-gray-700 text-white py-2 focus:outline-none focus:border-brand-red transition-colors font-sans [&>option]:bg-brand-zinc">
+                                <option>Full Detailing Package</option>
+                                <option>Ceramic Coating</option>
+                                <option>Paint Correction</option>
+                                <option>Interior/Exterior Only</option>
+                            </select>
+                        </div>
+
+                        <!-- Legal Disclaimers -->
+                        <div class="space-y-4 pt-4">
+                            <div class="flex items-start gap-3 opacity-60 hover:opacity-100 transition-opacity">
+                                <input type="checkbox" id="sms-consent" class="custom-checkbox mt-1 bg-transparent border-gray-700">
+                                <label for="sms-consent" class="text-[10px] text-gray-500 leading-tight">
+                                    I consent to receive transactional messages (appointment reminders, etc). Msg & Data rates may apply. Reply STOP to opt-out.
+                                </label>
+                            </div>
+                            <div class="flex items-start gap-3 opacity-60 hover:opacity-100 transition-opacity">
+                                <input type="checkbox" id="marketing-consent" class="custom-checkbox mt-1 bg-transparent border-gray-700">
+                                <label for="marketing-consent" class="text-[10px] text-gray-500 leading-tight">
+                                    I consent to receive marketing messages (offers, discounts). Msg & Data rates may apply. Reply STOP to opt-out.
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="button" class="mt-4 w-full bg-white text-black font-display font-bold uppercase tracking-widest py-4 hover:bg-brand-red hover:text-white transition-all duration-300">
+                            Submit Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white pt-20 pb-10 border-t border-white/10">
+        <div class="max-w-[1400px] mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <div class="flex items-center gap-2 justify-center md:justify-start mb-2">
+                    <span class="w-8 h-8 bg-brand-red rounded-full flex items-center justify-center font-display font-bold text-xs">M</span>
+                    <span class="font-display font-bold text-xl uppercase tracking-tighter">Miller's Detailing</span>
+                </div>
+                <p class="text-gray-500 text-sm font-sans">© 2024. All Rights Reserved.</p>
+                <div class="flex justify-center md:justify-start gap-4 mt-2 text-[10px] uppercase tracking-wider text-gray-600">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+            
+            <div class="flex gap-6">
+                <a href="#" class="text-gray-500 hover:text-brand-red transition-colors transform hover:-translate-y-1"><i data-lucide="instagram"></i></a>
+                <a href="#" class="text-gray-500 hover:text-brand-red transition-colors transform hover:-translate-y-1"><i data-lucide="facebook"></i></a>
+                <a href="#" class="text-gray-500 hover:text-brand-red transition-colors transform hover:-translate-y-1"><i data-lucide="twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVITY SCRIPTS -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Service Image Hover Effect
+        const changeImage = (index) => {
+            const images = document.querySelectorAll('.service-img');
+            images.forEach(img => img.classList.remove('active'));
+            
+            const selectedImage = document.querySelector(`.service-img[data-index="${index}"]`);
+            if(selectedImage) selectedImage.classList.add('active');
+        }
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if(mobileMenuBtn && closeMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+            
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+        }
+    </script>
+</body>
+</html>

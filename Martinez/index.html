@@ -1,0 +1,1357 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Martinez Touch | Miami Automotive Aesthetics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Syne:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              void: "#050505",
+              charcoal: "#0F0F0F",
+              glass: "rgba(255, 255, 255, 0.05)",
+              platinum: "#E5E4E2",
+            },
+            animation: {
+              scroll: "scroll 30s linear infinite",
+            },
+            keyframes: {
+              scroll: {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-100%)" },
+              },
+            },
+            fontFamily: {
+              display: ['"Syne"', "sans-serif"],
+              body: ['"Inter"', "sans-serif"],
+            },
+            backgroundImage: {
+              noise:
+                "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050505;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333;
+        border-radius: 3px;
+      }
+
+      .glass-nav {
+        background: rgba(5, 5, 5, 0.8);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      /* Before/After Slider */
+      .slider-handle {
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Hide scrollbar */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body
+    class="font-body text-platinum bg-void overflow-x-hidden selection:bg-white selection:text-black relative"
+  >
+    <!-- Grain Overlay for Cinematic Feel -->
+    <div
+      class="fixed inset-0 z-50 pointer-events-none w-full h-full bg-noise mix-blend-overlay opacity-30"
+    ></div>
+    <!-- PREMIUM NAVBAR SYSTEM -->
+    <nav
+      x-data="{ mobileMenuOpen: false }"
+      class="fixed top-0 left-0 w-full z-50 transition-all duration-500"
+      :class="{ 'bg-void/80 backdrop-blur-xl border-b border-white/5': !mobileMenuOpen, 'bg-transparent': mobileMenuOpen }"
+    >
+      <div
+        class="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-24 flex justify-between items-center relative z-50"
+      >
+        <!-- 1. Brand Identity -->
+        <a href="#" class="flex flex-col group">
+          <div class="flex items-center gap-2">
+            <span
+              class="text-sm md:text-xl font-display font-bold text-white tracking-wide uppercase group-hover:text-gray-300 transition-colors"
+              >Martinez Touch</span
+            >
+            <div
+              class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"
+              title="Available Now"
+            ></div>
+          </div>
+          <span
+            class="text-[9px] text-gray-500 uppercase tracking-[0.3em] group-hover:tracking-[0.35em] transition-all duration-500"
+            >Automotive Aesthetics</span
+          >
+        </a>
+
+        <!-- 2. Desktop Navigation (Hidden on Mobile) -->
+        <div
+          class="hidden lg:flex items-center gap-1 bg-white/5 p-1 rounded-full border border-white/5 backdrop-blur-md"
+        >
+          <a
+            href="#services"
+            class="px-6 py-2 rounded-full text-[10px] font-bold uppercase text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+            >Services</a
+          >
+          <a
+            href="#gallery"
+            class="px-6 py-2 rounded-full text-[10px] font-bold uppercase text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+            >Results</a
+          >
+          <a
+            href="#process"
+            class="px-6 py-2 rounded-full text-[10px] font-bold uppercase text-gray-400 hover:text-white hover:bg-white/10 transition-all duration-300"
+            >Process</a
+          >
+        </div>
+
+        <!-- 3. Actions (Social + CTA) -->
+        <div class="flex items-center gap-2 md:gap-4">
+          <!-- Instagram Badge (Desktop) -->
+          <a
+            href="https://instagram.com/themartineztouch_"
+            target="_blank"
+            class="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg border border-white/10 hover:bg-white/5 hover:border-white/30 transition-all group"
+          >
+            <i
+              class="fa-brands fa-instagram text-white group-hover:text-pink-500 transition-colors"
+            ></i>
+            <span class="text-xs font-bold text-white font-mono">33.2K</span>
+          </a>
+
+          <!-- Book Button -->
+          <a
+            href="tel:9546055507"
+            class="bg-white text-black px-3 py-1.5 md:px-6 md:py-3 rounded-sm font-bold uppercase text-[9px] md:text-xs tracking-widest hover:bg-gray-200 hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+          >
+            Book Now
+          </a>
+
+          <!-- Mobile Menu Trigger -->
+          <button
+            @click="mobileMenuOpen = !mobileMenuOpen"
+            class="lg:hidden w-8 h-8 md:w-10 md:h-10 flex flex-col justify-center items-center gap-1 md:gap-1.5 group relative z-50"
+          >
+            <span
+              class="w-6 h-[2px] bg-white transition-all duration-300"
+              :class="{ 'rotate-45 translate-y-2': mobileMenuOpen }"
+            ></span>
+            <span
+              class="w-4 h-[2px] bg-white/70 group-hover:w-6 transition-all duration-300"
+              :class="{ 'opacity-0': mobileMenuOpen }"
+            ></span>
+            <span
+              class="w-6 h-[2px] bg-white transition-all duration-300"
+              :class="{ '-rotate-45 -translate-y-2': mobileMenuOpen }"
+            ></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. CINEMATIC MOBILE MENU OVERLAY -->
+      <div
+        x-show="mobileMenuOpen"
+        x-transition:enter="transition ease-out duration-500"
+        x-transition:enter-start="opacity-0 translate-y-full"
+        x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 translate-y-full"
+        class="fixed inset-0 bg-black z-40 flex flex-col justify-center px-8 lg:hidden"
+      >
+        <!-- Abstract Background Shape -->
+        <div
+          class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-[100px] pointer-events-none"
+        ></div>
+
+        <div class="flex flex-col gap-6 text-center">
+          <a
+            @click="mobileMenuOpen = false"
+            href="#services"
+            class="text-4xl font-display font-bold text-white hover:text-gray-400 transition-colors"
+            >Services</a
+          >
+          <a
+            @click="mobileMenuOpen = false"
+            href="#gallery"
+            class="text-4xl font-display font-bold text-white hover:text-gray-400 transition-colors"
+            >Results</a
+          >
+          <a
+            @click="mobileMenuOpen = false"
+            href="#process"
+            class="text-4xl font-display font-bold text-white hover:text-gray-400 transition-colors"
+            >Process</a
+          >
+          <a
+            @click="mobileMenuOpen = false"
+            href="#contact"
+            class="text-4xl font-display font-bold text-white hover:text-gray-400 transition-colors"
+            >Contact</a
+          >
+        </div>
+
+        <!-- Mobile Social & Footer -->
+        <div class="absolute bottom-12 left-0 w-full px-8">
+          <div
+            class="border-t border-white/10 pt-8 flex justify-between items-center"
+          >
+            <a
+              href="https://instagram.com/themartineztouch_"
+              target="_blank"
+              class="flex items-center gap-2 text-white"
+            >
+              <i class="fa-brands fa-instagram text-xl"></i>
+              <span class="font-bold text-sm">33.2K Followers</span>
+            </a>
+            <span class="text-xs text-gray-500 uppercase tracking-widest"
+              >Est. Miami</span
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- REQUIRED: Alpine.js for the interactions (Paste this in your <head>) -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <section class="relative h-screen w-full overflow-hidden flex items-end">
+      <!-- Background Video -->
+      <!-- Use a video with slow motion water/foam for best effect -->
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="hero.mp4" type="video/mp4" />
+      </video>
+
+      <!-- Gradient Overlay (Heavy at bottom for text readability) -->
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"
+      ></div>
+
+      <div
+        class="relative z-10 w-full px-6 md:px-12 pb-12 md:pb-20 flex flex-col md:flex-row items-start md:items-end justify-between gap-12"
+      >
+        <!-- Left: Massive Typography -->
+        <div class="max-w-4xl">
+          <div class="flex items-center gap-4 mb-6 text-white/60">
+            <span class="text-xs font-bold uppercase tracking-[0.3em]"
+              >Est. Miami</span
+            >
+          </div>
+
+          <h1
+            class="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-display font-bold text-white leading-[0.85] tracking-tighter uppercase"
+          >
+            Paint<br />
+            <span
+              class="text-transparent"
+              style="-webkit-text-stroke: 2px white"
+              >Correction</span
+            ><br />
+            Specialist.
+          </h1>
+        </div>
+
+        <!-- Right: CTA -->
+        <div class="flex flex-col items-start md:items-end gap-8 w-full md:w-auto mt-8 md:mt-0">
+          <!-- Massive CTA -->
+          <a
+            href="tel:9546055507"
+            class="group relative overflow-hidden bg-white text-black px-6 py-4 md:px-12 md:py-6 flex items-center justify-between md:justify-start w-full md:w-max gap-4"
+          >
+            <div class="flex flex-col text-left whitespace-nowrap">
+              <span
+                class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-gray-500"
+                >Next Available Slot</span
+              >
+              <span class="text-lg md:text-xl font-bold uppercase tracking-tighter"
+                >Book Today</span
+              >
+            </div>
+            <div
+              class="w-10 h-10 md:w-12 md:h-12 shrink-0 bg-black text-white rounded-full flex items-center justify-center group-hover:rotate-45 transition duration-500"
+            >
+              <i class="fa-solid fa-arrow-up text-base md:text-lg"></i>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VARIATION 1: HOLLOW OUTLINE -->
+    <div class="bg-void border-y border-white/5 py-10 overflow-hidden relative">
+      <div class="flex w-[200%] animate-scroll gap-12 items-center">
+        <!-- Content Item -->
+        <span
+          class="text-4xl sm:text-5xl md:text-8xl font-display font-black text-transparent uppercase tracking-tighter shrink-0 transition-colors duration-500 hover:text-white/10 cursor-default"
+          style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15)"
+        >
+          Paint Correction
+        </span>
+        <!-- Content Item -->
+        <span
+          class="text-4xl sm:text-5xl md:text-8xl font-display font-black text-transparent uppercase tracking-tighter shrink-0 transition-colors duration-500 hover:text-white/10 cursor-default"
+          style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15)"
+        >
+          Ceramic Coating
+        </span>
+        <!-- Content Item -->
+        <span
+          class="text-4xl sm:text-5xl md:text-8xl font-display font-black text-transparent uppercase tracking-tighter shrink-0 transition-colors duration-500 hover:text-white/10 cursor-default"
+          style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15)"
+        >
+          Automotive Art
+        </span>
+        <!-- Duplicate for loop -->
+        <span
+          class="text-4xl sm:text-5xl md:text-8xl font-display font-black text-transparent uppercase tracking-tighter shrink-0 transition-colors duration-500 hover:text-white/10 cursor-default"
+          style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15)"
+        >
+          Paint Correction
+        </span>
+        <span
+          class="text-4xl sm:text-5xl md:text-8xl font-display font-black text-transparent uppercase tracking-tighter shrink-0 transition-colors duration-500 hover:text-white/10 cursor-default"
+          style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15)"
+        >
+          Ceramic Coating
+        </span>
+        <span
+          class="text-4xl sm:text-5xl md:text-8xl font-display font-black text-transparent uppercase tracking-tighter shrink-0 transition-colors duration-500 hover:text-white/10 cursor-default"
+          style="-webkit-text-stroke: 1px rgba(255, 255, 255, 0.15)"
+        >
+          Automotive Art
+        </span>
+      </div>
+    </div>
+    <!-- CINEMATIC SERVICE ARRAY -->
+    <section id="services" class="py-24 bg-void">
+      <div class="container mx-auto px-6">
+        <!-- Section Header -->
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6"
+        >
+          <div>
+            <span
+              class="text-xs font-bold text-brand-blue uppercase tracking-widest mb-2 block"
+              >Comprehensive Care</span
+            >
+            <h2 class="text-3xl md:text-5xl font-display font-bold text-white">
+              The
+              <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500"
+                >Collection</span
+              >
+            </h2>
+          </div>
+          <div
+            class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-500"
+          >
+            <span
+              class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+            ></span>
+            Mobile & Shop Available
+          </div>
+        </div>
+
+        <!-- THE GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-3 auto-rows-[350px] gap-4">
+          <!-- 1. MOBILE UNIT (IMAGE - Wide) -->
+          <div
+            class="group relative md:col-span-2 rounded-sm overflow-hidden border border-white/10"
+          >
+            <div
+              class="absolute top-4 left-4 z-20 bg-brand-gold text-black text-[10px] font-bold px-3 py-1 uppercase tracking-widest"
+            >
+              We Come To You
+            </div>
+
+            <!-- Specific Image Requested -->
+            <img
+              src="mobile.png"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              alt="Mobile Detailing Van"
+            />
+
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"
+            ></div>
+
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+                Mobile Detailing
+              </h3>
+              <p class="text-gray-300 text-sm max-w-md mb-4 hidden md:block">
+                Our van is a fully autonomous unit equipped with water and
+                power. We service your home or office without needing utilities.
+              </p>
+              <a
+                href="tel:9546055507"
+                class="inline-flex items-center gap-2 text-white text-xs font-bold uppercase tracking-widest border-b border-white pb-1 hover:text-brand-gold hover:border-brand-gold transition"
+              >
+                Book Mobile Service
+                <i class="fa-solid fa-arrow-right -rotate-45"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- 2. CERAMIC COATING (VIDEO - Tall) -->
+          <div
+            class="group relative md:row-span-2 rounded-sm overflow-hidden border border-white/10 bg-charcoal"
+          >
+            <div
+              class="absolute top-4 right-4 z-20 bg-brand-blue text-white text-[10px] font-bold px-3 py-1 uppercase tracking-widest"
+            >
+              Protection
+            </div>
+
+            <!-- Switched to Video -->
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            >
+              <source src="ceramic.mp4" />
+            </video>
+
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"
+            ></div>
+
+            <div class="absolute bottom-0 left-0 p-8 w-full">
+              <h3 class="text-2xl md:text-3xl font-display font-bold text-white mb-2">
+                Ceramic Coating
+              </h3>
+              <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+                System X Certified application. 3-5 years of hydrophobic armor
+                against UV rays, bird droppings, and industrial fallout.
+              </p>
+              <ul
+                class="text-xs text-gray-400 space-y-2 mb-6 uppercase tracking-wider font-mono"
+              >
+                <li>+ Extreme Gloss</li>
+                <li>+ Self-Cleaning</li>
+                <li>+ 9H Hardness</li>
+              </ul>
+              <a
+                href="#"
+                class="block w-full py-3 bg-white/10 text-center text-white text-xs font-bold uppercase hover:bg-white hover:text-black transition"
+                >Get Quote</a
+              >
+            </div>
+          </div>
+
+          <!-- 3. PAINT CORRECTION (VIDEO - Standard) -->
+          <div
+            class="group relative rounded-sm overflow-hidden border border-white/10"
+          >
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            >
+              <source src="paint-correction.mp4" />
+            </video>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"
+            ></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <h3 class="text-xl md:text-2xl font-display font-bold text-white">
+                Paint Correction
+              </h3>
+              <p class="text-xs text-gray-300 mt-1">Swirl & scratch removal.</p>
+            </div>
+          </div>
+
+          <!-- 4. INTERIOR DETAIL (VIDEO - Standard) -->
+          <div
+            class="group relative rounded-sm overflow-hidden border border-white/10"
+          >
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            >
+              <source src="interior.mp4" type="video/mp4" />
+            </video>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"
+            ></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <h3 class="text-xl md:text-2xl font-display font-bold text-white">
+                Interior Detail
+              </h3>
+              <p class="text-xs text-gray-300 mt-1">
+                Steam clean & leather care.
+              </p>
+            </div>
+          </div>
+
+          <!-- 5. CARPET LINES (VIDEO - Standard) -->
+          <div
+            class="group relative rounded-sm overflow-hidden border border-white/10"
+          >
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            >
+              <!-- Your Specific Video File -->
+              <source src="carpet.mp4" type="video/mp4" />
+            </video>
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"
+            ></div>
+            <div class="absolute bottom-0 left-0 p-6">
+              <h3 class="text-xl md:text-2xl font-display font-bold text-white">
+                Carpet Lines
+              </h3>
+              <p class="text-xs text-gray-300 mt-1">
+                Signature precision finish.
+              </p>
+            </div>
+          </div>
+          <!-- 6. EXTERIOR WASH (IMAGE - Wide) -->
+          <div
+            class="group relative md:col-span-2 rounded-sm overflow-hidden border border-white/10 bg-charcoal h-full min-h-[350px]"
+          >
+            <!-- Image Background -->
+            <img
+              src="exterior.png"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-100"
+              alt="Exterior Foam Wash"
+            />
+
+            <!-- Dark Gradient Overlay (Ensures text is readable) -->
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"
+            ></div>
+
+            <!-- Text Content -->
+            <div
+              class="absolute bottom-0 left-0 p-8 flex justify-between items-end w-full z-20"
+            >
+              <div>
+                <h3 class="text-3xl font-display font-bold text-white">
+                  Exterior Detail
+                </h3>
+                <p class="text-sm text-gray-300 mt-1">
+                  Touchless foam prep & hand wash.
+                </p>
+              </div>
+              <div
+                class="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all"
+              >
+                <i
+                  class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform duration-300"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- VARIATION 2: EDITORIAL TYPOGRAPHY -->
+    <section class="py-20 bg-void relative overflow-hidden">
+      <!-- Background Number (Subtle Watermark) -->
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] md:text-[20vw] font-display font-bold text-white/5 select-none pointer-events-none"
+      >
+        24/6
+      </div>
+
+      <div class="container mx-auto px-6 relative z-10 text-center">
+        <span
+          class="text-brand-blue text-xs font-bold uppercase tracking-[0.4em] mb-4 block"
+          >Opening Hours</span
+        >
+
+        <h2
+          class="text-4xl sm:text-5xl md:text-8xl lg:text-9xl font-display font-bold text-white tracking-tighter leading-none mb-4"
+        >
+          7<span
+            class="text-2xl align-top text-gray-500 font-sans font-medium mt-4"
+            >AM</span
+          >
+          <span class="text-brand-gold mx-4 font-light">—</span>
+          5<span
+            class="text-2xl align-top text-gray-500 font-sans font-medium mt-4"
+            >PM</span
+          >
+        </h2>
+
+        <div
+          class="inline-flex items-center gap-4 mt-4 border border-white/10 px-6 py-2 rounded-full"
+        >
+          <span class="text-sm text-gray-300 font-medium"
+            >Monday through Saturday</span
+          >
+          <div class="w-1.5 h-1.5 bg-gray-500 rounded-full"></div>
+          <span class="text-xs text-gray-500 uppercase tracking-widest"
+            >Sunday Closed</span
+          >
+        </div>
+      </div>
+    </section>
+    <!-- GOOGLE REVIEWS SECTION -->
+    <section class="py-24 bg-void border-t border-white/5 relative">
+      <!-- Background Glow for Atmosphere -->
+      <div
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-brand-gold/5 blur-[120px] pointer-events-none"
+      ></div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <!-- Header -->
+        <div class="text-center mb-20">
+          <div class="flex items-center justify-center gap-2 mb-4">
+            <div
+              class="w-8 h-8 bg-white rounded-full flex items-center justify-center"
+            >
+              <!-- Google 'G' Icon -->
+              <svg
+                class="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                  fill="#4285F4"
+                />
+                <path
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                  fill="#34A853"
+                />
+                <path
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                  fill="#FBBC05"
+                />
+                <path
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                  fill="#EA4335"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <h2
+            class="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white uppercase tracking-tight mb-6"
+          >
+            Trusted
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500"
+              >By</span
+            >
+          </h2>
+
+          <div class="flex justify-center gap-1 text-brand-gold text-lg">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p
+            class="text-xs font-bold text-gray-500 uppercase tracking-widest mt-2"
+          >
+            Based on 60+ 5-Star Reviews
+          </p>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1: Gustavo -->
+          <div
+            class="bg-charcoal border border-white/5 p-8 rounded-sm hover:border-white/20 transition-all duration-300 group"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-white text-void font-bold flex items-center justify-center text-sm"
+                >
+                  GR
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm">Gustavo Rovirosa</h4>
+                  <p
+                    class="text-[10px] text-gray-500 uppercase tracking-widest"
+                  >
+                    Verified Client
+                  </p>
+                </div>
+              </div>
+              <i
+                class="fa-solid fa-quote-right text-white/10 text-2xl group-hover:text-brand-gold/50 transition-colors"
+              ></i>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-4">
+              "The experience was excellent from start to finish. He arrived
+              right on time... He took his time and made sure my car looked just
+              as good as the day I drove it off the dealership lot."
+            </p>
+            <div
+              class="flex justify-between items-center pt-6 border-t border-white/5"
+            >
+              <div class="flex text-brand-gold text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] text-gray-600 uppercase"
+                >2 months ago</span
+              >
+            </div>
+          </div>
+
+          <!-- Card 2: Jayce -->
+          <div
+            class="bg-charcoal border border-white/5 p-8 rounded-sm hover:border-white/20 transition-all duration-300 group"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-white text-void font-bold flex items-center justify-center text-sm"
+                >
+                  JE
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm">Jayce Evey</h4>
+                  <p
+                    class="text-[10px] text-gray-500 uppercase tracking-widest"
+                  >
+                    Local Guide
+                  </p>
+                </div>
+              </div>
+              <i
+                class="fa-solid fa-quote-right text-white/10 text-2xl group-hover:text-brand-gold/50 transition-colors"
+              ></i>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              "Moises killed it! 1-step paint correction and ceramic coat on my
+              F250 turned out flawless. Couldn't be happier with the results...
+              Highly recommended."
+            </p>
+            <div
+              class="flex justify-between items-center pt-6 border-t border-white/5"
+            >
+              <div class="flex text-brand-gold text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] text-gray-600 uppercase"
+                >1 month ago</span
+              >
+            </div>
+          </div>
+
+          <!-- Card 3: Kandice -->
+          <div
+            class="bg-charcoal border border-white/5 p-8 rounded-sm hover:border-white/20 transition-all duration-300 group"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-white text-void font-bold flex items-center justify-center text-sm"
+                >
+                  KS
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm">Kandice Suarez</h4>
+                  <p
+                    class="text-[10px] text-gray-500 uppercase tracking-widest"
+                  >
+                    Verified Client
+                  </p>
+                </div>
+              </div>
+              <i
+                class="fa-solid fa-quote-right text-white/10 text-2xl group-hover:text-brand-gold/50 transition-colors"
+              ></i>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              "Impeccable attention to detail! Moises is beyond efficient and
+              reliable. My car is still shining bright after a week of
+              detailing."
+            </p>
+            <div
+              class="flex justify-between items-center pt-6 border-t border-white/5"
+            >
+              <div class="flex text-brand-gold text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] text-gray-600 uppercase"
+                >1 month ago</span
+              >
+            </div>
+          </div>
+
+          <!-- Card 4: Miguel -->
+          <div
+            class="bg-charcoal border border-white/5 p-8 rounded-sm hover:border-white/20 transition-all duration-300 group"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-white text-void font-bold flex items-center justify-center text-sm"
+                >
+                  MT
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm">Miguel Torres</h4>
+                  <p
+                    class="text-[10px] text-gray-500 uppercase tracking-widest"
+                  >
+                    Verified Client
+                  </p>
+                </div>
+              </div>
+              <i
+                class="fa-solid fa-quote-right text-white/10 text-2xl group-hover:text-brand-gold/50 transition-colors"
+              ></i>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6">
+              "He came right to my location, was on time, professional, and
+              super thorough. My car looks amazing inside and out — spotless,
+              shiny, and smelling fresh."
+            </p>
+            <div
+              class="flex justify-between items-center pt-6 border-t border-white/5"
+            >
+              <div class="flex text-brand-gold text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] text-gray-600 uppercase"
+                >3 months ago</span
+              >
+            </div>
+          </div>
+
+          <!-- Card 5: Cynthia -->
+          <div
+            class="bg-charcoal border border-white/5 p-8 rounded-sm hover:border-white/20 transition-all duration-300 group"
+          >
+            <div class="flex justify-between items-start mb-6">
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-white text-void font-bold flex items-center justify-center text-sm"
+                >
+                  CD
+                </div>
+                <div>
+                  <h4 class="text-white font-bold text-sm">Cynthia Davila</h4>
+                  <p
+                    class="text-[10px] text-gray-500 uppercase tracking-widest"
+                  >
+                    Verified Client
+                  </p>
+                </div>
+              </div>
+              <i
+                class="fa-solid fa-quote-right text-white/10 text-2xl group-hover:text-brand-gold/50 transition-colors"
+              ></i>
+            </div>
+            <p class="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-4">
+              "All I can say is wow! Moises was super easy to communicate
+              with... It looks absolutely brand new! The best part? He’s mobile
+              and comes right to you."
+            </p>
+            <div
+              class="flex justify-between items-center pt-6 border-t border-white/5"
+            >
+              <div class="flex text-brand-gold text-xs gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+                ><i class="fa-solid fa-star"></i>
+              </div>
+              <span class="text-[10px] text-gray-600 uppercase"
+                >6 months ago</span
+              >
+            </div>
+          </div>
+
+          <!-- Card 6: CTA Summary -->
+          <div
+            class="bg-white p-8 rounded-sm flex flex-col justify-center items-center text-center group cursor-pointer hover:bg-gray-200 transition-colors"
+          >
+            <div
+              class="w-16 h-16 bg-brand-blue/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+            >
+              <i class="fa-brands fa-google text-2xl text-brand-blue"></i>
+            </div>
+            <h3 class="text-void font-display font-bold text-2xl mb-2">
+              Join the Elite.
+            </h3>
+            <p class="text-gray-600 text-sm mb-8">
+              See why South Florida trusts The Martinez Touch.
+            </p>
+            <a
+              href="https://www.google.com/maps/place/The+Martinez+Touch+Detailing+%26+Ceramic+Coating/@34.0751732,-75.333711,7793782m/data=!3m1!1e3!4m18!1m9!3m8!1s0x6dade2e9f67a30d:0x82aa0d11d01f82d!2sThe+Martinez+Touch+Detailing+%26+Ceramic+Coating!8m2!3d33.6271325!4d-78.5735385!9m1!1b1!16s%2Fg%2F11pcsdkdxr!3m7!1s0x6dade2e9f67a30d:0x82aa0d11d01f82d!8m2!3d33.6271325!4d-78.5735385!9m1!1b1!16s%2Fg%2F11pcsdkdxr?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              class="text-xs font-bold uppercase tracking-widest text-void border-b-2 border-void pb-1 hover:text-brand-blue hover:border-brand-blue transition"
+            >
+              Read All Reviews ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Link -->
+        <div class="text-center mt-16">
+          <a
+            href="https://www.google.com/maps/place/The+Martinez+Touch+Detailing+%26+Ceramic+Coating/@34.0751732,-75.333711,7793782m/data=!3m1!1e3!4m18!1m9!3m8!1s0x6dade2e9f67a30d:0x82aa0d11d01f82d!2sThe+Martinez+Touch+Detailing+%26+Ceramic+Coating!8m2!3d33.6271325!4d-78.5735385!9m1!1b1!16s%2Fg%2F11pcsdkdxr!3m7!1s0x6dade2e9f67a30d:0x82aa0d11d01f82d!8m2!3d33.6271325!4d-78.5735385!9m1!1b1!16s%2Fg%2F11pcsdkdxr?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            class="inline-flex items-center gap-2 text-xs font-bold text-white uppercase tracking-widest hover:text-brand-gold transition-colors"
+          >
+            Read All Reviews on Google
+            <i class="fa-solid fa-arrow-right -rotate-45"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY SECTION -->
+    <section class="py-32 bg-charcoal relative">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+          <!-- Visual -->
+          <div class="lg:w-1/2 relative">
+            <div
+              class="absolute -top-2 -left-2 md:-top-4 md:-left-4 w-16 h-16 md:w-24 md:h-24 border-t-2 border-l-2 border-brand-gold"
+            ></div>
+            <img
+              src="philosphy.png"
+              class="w-full h-[400px] md:h-[600px] object-cover rounded-sm"
+              alt="Detailing Process"
+            />
+            <div
+              class="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-16 h-16 md:w-24 md:h-24 border-b-2 border-r-2 border-brand-blue"
+            ></div>
+          </div>
+
+          <!-- Narrative -->
+          <div class="lg:w-1/2">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="h-[1px] w-12 bg-white/30"></div>
+              <span
+                class="text-xs font-bold uppercase tracking-[0.3em] text-white"
+                >Our Philosophy</span
+              >
+            </div>
+
+            <h2
+              class="text-3xl md:text-5xl lg:text-6xl font-display font-bold text-white mb-8 leading-tight"
+            >
+              "We don't rush. <br />
+              We <span class="text-brand-gold">Refine.</span>"
+            </h2>
+
+            <div
+              class="space-y-6 text-gray-400 leading-relaxed font-light text-lg"
+            >
+              <p>
+                In an industry built on volume and speed, we chose a different
+                path. The Martinez Touch was founded on the belief that
+                detailing is an art form, not a chore.
+              </p>
+              <p>
+                Every vehicle we touch is treated with the same respect as a
+                museum piece. Whether it's a daily driver or a weekend supercar,
+                our standard remains absolute:
+                <strong class="text-white">Perfection or nothing.</strong>
+              </p>
+            </div>
+
+            <div class="mt-12 flex items-center gap-4">
+              <div
+                class="w-12 h-12 bg-white text-black rounded-full flex items-center justify-center font-display font-bold text-xl"
+              >
+                M
+              </div>
+              <div>
+                <p
+                  class="text-white font-bold uppercase tracking-widest text-sm"
+                >
+                  Moises Martinez
+                </p>
+                <p class="text-brand-blue text-xs uppercase tracking-widest">
+                  Founder & Lead Specialist
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="py-24 bg-void border-t border-white/5">
+      <div class="container mx-auto px-6 max-w-3xl">
+        <div class="text-center mb-16">
+          <span
+            class="text-brand-gold text-xs font-bold uppercase tracking-widest"
+            >Common Questions</span
+          >
+          <h2 class="text-2xl md:text-3xl font-display font-bold text-white mt-2">
+            Client Information
+          </h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- Question 1 -->
+          <details
+            class="group bg-charcoal border border-white/5 rounded-sm p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-white/20 transition-all duration-300"
+          >
+            <summary
+              class="flex items-center justify-between text-white font-medium"
+            >
+              Do I need to provide water or power?
+              <span
+                class="text-gray-500 group-open:text-brand-blue transition group-open:rotate-180"
+              >
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <p
+              class="text-gray-400 text-sm mt-4 leading-relaxed animate-fade-in"
+            >
+              No. Our mobile unit is fully autonomous. We carry our own
+              spot-free water tank and generator power. We can service your
+              vehicle at your apartment complex, office garage, or driveway
+              without needing any connections.
+            </p>
+          </details>
+
+          <!-- Question 2 -->
+          <details
+            class="group bg-charcoal border border-white/5 rounded-sm p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-white/20 transition-all duration-300"
+          >
+            <summary
+              class="flex items-center justify-between text-white font-medium"
+            >
+              How long does a Paint Correction take?
+              <span
+                class="text-gray-500 group-open:text-brand-blue transition group-open:rotate-180"
+              >
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <p
+              class="text-gray-400 text-sm mt-4 leading-relaxed animate-fade-in"
+            >
+              This depends on the level of correction required. A 1-step polish
+              typically takes 4-6 hours. A multi-stage correction for showroom
+              perfection can take 1-2 days. We prioritize quality over speed.
+            </p>
+          </details>
+
+          <!-- Question 3 -->
+          <details
+            class="group bg-charcoal border border-white/5 rounded-sm p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-white/20 transition-all duration-300"
+          >
+            <summary
+              class="flex items-center justify-between text-white font-medium"
+            >
+              What areas do you service?
+              <span
+                class="text-gray-500 group-open:text-brand-blue transition group-open:rotate-180"
+              >
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <p
+              class="text-gray-400 text-sm mt-4 leading-relaxed animate-fade-in"
+            >
+              We cover the majority of South Florida, specifically Miami-Dade
+              and Broward County. This includes Brickell, Coral Gables, Miami
+              Beach, Fort Lauderdale, and Weston.
+            </p>
+          </details>
+
+          <!-- Question 4 -->
+          <details
+            class="group bg-charcoal border border-white/5 rounded-sm p-6 [&_summary::-webkit-details-marker]:hidden cursor-pointer open:border-white/20 transition-all duration-300"
+          >
+            <summary
+              class="flex items-center justify-between text-white font-medium"
+            >
+              How do I maintain my Ceramic Coating?
+              <span
+                class="text-gray-500 group-open:text-brand-blue transition group-open:rotate-180"
+              >
+                <i class="fa-solid fa-chevron-down"></i>
+              </span>
+            </summary>
+            <p
+              class="text-gray-400 text-sm mt-4 leading-relaxed animate-fade-in"
+            >
+              We recommend a bi-weekly maintenance wash using pH-neutral soaps.
+              Avoid automatic car washes with brushes, as they will damage the
+              coating's hydrophobic properties. We offer maintenance plans
+              specifically for coated vehicles.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT / LOCATION -->
+    <section id="contact" class="py-24 bg-void relative">
+      <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <!-- Text Info -->
+          <div>
+            <div
+              class="inline-block border border-white/20 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest text-white mb-6"
+            >
+              Fully Autonomous Unit
+            </div>
+            <h2
+              class="text-3xl md:text-5xl font-display font-bold text-white mb-6 leading-tight"
+            >
+              We Come To You.<br />
+              <span class="text-gray-500">Or You Come To Us.</span>
+            </h2>
+            <p
+              class="text-gray-400 text-lg font-light leading-relaxed mb-10 max-w-md"
+            >
+              Our mobile unit is equipped with spot-free water and power. We
+              service your vehicle at your home or office. Or visit our shop for
+              major corrections.
+            </p>
+
+            <div class="space-y-6">
+              <div
+                class="flex items-start gap-4 p-4 border border-white/5 bg-charcoal hover:border-white/20 transition"
+              >
+                <div
+                  class="w-10 h-10 bg-white/5 flex items-center justify-center text-white rounded-full"
+                >
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div>
+                  <h4 class="text-white font-bold uppercase text-sm">
+                    Service Area
+                  </h4>
+                  <p class="text-gray-500 text-xs mt-1">
+                    Miami-Dade & Broward County
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="flex items-start gap-4 p-4 border border-white/5 bg-charcoal hover:border-white/20 transition"
+              >
+                <div
+                  class="w-10 h-10 bg-white/5 flex items-center justify-center text-white rounded-full"
+                >
+                  <i class="fa-solid fa-clock"></i>
+                </div>
+                <div>
+                  <h4 class="text-white font-bold uppercase text-sm">Hours</h4>
+                  <p class="text-gray-500 text-xs mt-1">Mon - Sat: 7AM - 5PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Map Aesthetic (Simple & Clean) -->
+          <div
+            class="h-[350px] md:h-[500px] w-full relative border border-white/10 rounded-sm overflow-hidden"
+          >
+            <!-- Dark Mode Map -->
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d457662.6774646565!2d-80.224141!3d26.010839!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+              width="100%"
+              height="100%"
+              style="border: 0; filter: grayscale(40%) contrast(83%)"
+              allowfullscreen=""
+              loading="lazy"
+            >
+            </iframe>
+
+            <!-- Clean Label -->
+            <div
+              class="absolute bottom-6 left-6 bg-black text-white px-5 py-3 text-xs font-bold uppercase tracking-widest border border-white/20"
+            >
+              Service Area: Miami & Broward
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- VARIATION 1: MASSIVE BRAND -->
+    <footer
+      class="bg-void pt-32 pb-12 border-t border-white/5 relative overflow-hidden"
+    >
+      <!-- Background Texture -->
+      <div
+        class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5 pointer-events-none"
+      ></div>
+
+      <div class="container mx-auto px-6 relative z-10">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start md:items-end gap-12 mb-16 md:mb-24"
+        >
+          <!-- Left: Call to Action -->
+          <div class="max-w-md">
+            <span
+              class="text-brand-blue text-xs font-bold uppercase tracking-[0.3em] mb-4 block"
+              >Ready to start?</span
+            >
+            <h2
+              class="text-3xl md:text-5xl font-display font-bold text-white mb-8"
+            >
+              Let's refine your vehicle.
+            </h2>
+            <a
+              href="tel:9546055507"
+              class="inline-flex items-center gap-3 bg-white text-black px-8 py-4 text-xs font-bold uppercase tracking-widest hover:bg-brand-gold transition-colors group"
+            >
+              Book Appointment
+              <i
+                class="fa-solid fa-arrow-right -rotate-45 group-hover:rotate-0 transition-transform"
+              ></i>
+            </a>
+          </div>
+
+          <!-- Right: Links -->
+          <div class="grid grid-cols-2 gap-16 text-sm">
+            <div>
+              <h4
+                class="text-white font-bold uppercase tracking-widest text-xs mb-6"
+              >
+                Menu
+              </h4>
+              <ul class="space-y-4 text-gray-500">
+                <li>
+                  <a href="#services" class="hover:text-white transition"
+                    >Services</a
+                  >
+                </li>
+                <li>
+                  <a href="#process" class="hover:text-white transition"
+                    >Process</a
+                  >
+                </li>
+                <li>
+                  <a href="#gallery" class="hover:text-white transition"
+                    >Results</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4
+                class="text-white font-bold uppercase tracking-widest text-xs mb-6"
+              >
+                Social
+              </h4>
+              <ul class="space-y-4 text-gray-500">
+                <li>
+                  <a href="#" class="hover:text-white transition">Instagram</a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">TikTok</a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-white transition">Email</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+      // 1. Before/After Slider Logic
+      const container = document.querySelector(".aspect-\\[16\\/9\\]");
+      const overlay = document.getElementById("compare-overlay");
+      const handle = document.getElementById("slider-handle");
+      let isDragging = false;
+
+      if (container && overlay && handle) {
+        const updateSlider = (x) => {
+          const rect = container.getBoundingClientRect();
+          let position = ((x - rect.left) / rect.width) * 100;
+          position = Math.max(0, Math.min(100, position));
+          overlay.style.width = `${position}%`;
+          handle.style.left = `${position}%`;
+        };
+
+        handle.addEventListener("mousedown", () => (isDragging = true));
+        window.addEventListener("mouseup", () => (isDragging = false));
+        window.addEventListener("mousemove", (e) => {
+          if (!isDragging) return;
+          updateSlider(e.clientX);
+        });
+
+        handle.addEventListener("touchstart", () => (isDragging = true));
+        window.addEventListener("touchend", () => (isDragging = false));
+        window.addEventListener("touchmove", (e) => {
+          if (!isDragging) return;
+          updateSlider(e.touches[0].clientX);
+        });
+
+        container.addEventListener("click", (e) => updateSlider(e.clientX));
+      }
+
+      // 2. Reel Play Logic
+      document.querySelectorAll(".reel-card").forEach((card) => {
+        const video = card.querySelector("video");
+        card.addEventListener("mouseenter", () => video.play());
+        card.addEventListener("mouseleave", () => video.pause());
+      });
+    </script>
+  </body>
+</html>
